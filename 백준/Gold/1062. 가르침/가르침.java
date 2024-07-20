@@ -60,15 +60,11 @@ public class Main {
     		
     		for (int i = 0; i < n; i++) {
     			if ((prob & arr[i]) == arr[i]) res++;
-    			
-    			if (res + n - i - 1 <= ans) return;
     		}
     		
     		if (ans < res) ans = res;
     		return;
     	}
-    	
-    	if (depth == 26) return;
     	
     	for (int i = depth; i < 26; i++) {
     		if ((prob & (1 << i)) != 0) continue;
