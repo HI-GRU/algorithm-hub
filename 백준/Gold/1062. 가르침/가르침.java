@@ -21,17 +21,21 @@ public class Main {
             System.out.println(0);
             return;
         }
+        if (k == 26) {
+        	System.out.println(n);
+        	return;
+        }
          
          arr = new int[n];
          
          for (int i = 0; i < n; i++) {
         	 int res = 0;
-        	 char[] crr = br.readLine().toCharArray();
-        	 for (int j = 0; j < crr.length; j++) {
+        	 String str = br.readLine();
+        	 for (int j = 0; j < str.length(); j++) {
         		 
-        		 if ((res & (1 << (crr[j] - 'a'))) != 0) continue;
+        		 if ((res & (1 << (str.charAt(j) - 'a'))) != 0) continue;
         		 
-        		 res |= 1 << (crr[j] - 'a');
+        		 res |= 1 << (str.charAt(j) - 'a');
         	 }
         	 
         	 arr[i] = res;
