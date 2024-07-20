@@ -47,7 +47,7 @@ public class Main {
          prob |= 1 << ('i' - 'a');
          prob |= 1 << ('c' - 'a');
          
-         comb(0, 5, prob);
+         comb(1, 5, prob);
          System.out.println(ans);
     }
     static void comb(int depth, int cnt, int prob) {
@@ -70,11 +70,9 @@ public class Main {
     	
     	if (depth == 26) return;
     	
-    	if (depth == 'a' - 'a' || depth == 'n' - 'a' || depth == 't' - 'a' || depth == 'i' - 'a' || depth == 'c' - 'a') {
-    		comb(depth + 1, cnt, prob);
-    	} else {
-    		comb(depth + 1, cnt + 1, prob | 1 << depth);
-        	comb(depth + 1, cnt, prob);
+    	for (int i = depth; i < 26; i++) {
+    		if ((prob & (1 << i)) != 0) continue;
+    		comb(i, cnt + 1, prob | (1 << i));
     	}
     }
 }
