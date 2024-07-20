@@ -29,16 +29,13 @@ public class Main {
          arr = new int[n];
          
          for (int i = 0; i < n; i++) {
-        	 int res = 0;
         	 String str = br.readLine();
         	 for (int j = 0; j < str.length(); j++) {
         		 
-        		 if ((res & (1 << (str.charAt(j) - 'a'))) != 0) continue;
+        		 if ((arr[i] & (1 << (str.charAt(j) - 'a'))) != 0) continue;
         		 
-        		 res |= 1 << (str.charAt(j) - 'a');
+        		 arr[i] |= 1 << (str.charAt(j) - 'a');
         	 }
-        	 
-        	 arr[i] = res;
          }
 
          ans = 0;
