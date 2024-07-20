@@ -52,8 +52,6 @@ public class Main {
     }
     static void comb(int depth, int cnt, int prob) {
     	
-    	if (26 - depth < k - cnt) return;
-    	
     	if (cnt == k) {
     		
     		int res = 0;
