@@ -23,7 +23,7 @@ public class Main {
 
          
          int start = 0;
-         int end = arr[n - 1] - arr[0];
+         int end = 1_000_000_000;
          int ans = 0;
          
          while (start <= end) {
