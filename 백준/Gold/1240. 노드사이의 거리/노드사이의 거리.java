@@ -47,13 +47,13 @@ public class Main {
         	int u = Integer.parseInt(st.nextToken());
         	int v = Integer.parseInt(st.nextToken());
         	
-        	sb.append(easyLcs(u, v)).append('\n');
+        	sb.append(easyLca(u, v)).append('\n');
         }
         
         System.out.println(sb);
     }
     
-    static int easyLcs(int u, int v) {
+    static int easyLca(int u, int v) {
     	int res = 0;
     	
     	while (dist[u] > dist[v]) {
