@@ -48,16 +48,16 @@ public class Main {
 		List<Integer> list = new ArrayList<>();
 		
 		k = n;
+		long total = 0;
+		
 		while (k != 0) {
 			for (int next : graph[k]) {
 				if (line1[next]) continue;
 				list.add(visit[next]);
+				total += visit[next];
 			}
 			k = back[k];
 		}
-		
-		long total = 0;
-		for (int t : list) total += t;
 		
 		long res = 0;
 		for (int t : list) res += t * (total - t);
