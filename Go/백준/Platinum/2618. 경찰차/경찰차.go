@@ -3,7 +3,6 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"math"
 	"os"
 	"strconv"
 	"strings"
@@ -13,9 +12,9 @@ var (
 	n      int
 	w      int
 	dp     [][]int
-	pts    [][]int
-	memo   [][][]int
-	resArr [][]int
+	pts    [][2]int
+	memo   [][][2]int
+	resArr [][2]int
 )
 
 const INF = 3_000_000
@@ -24,14 +23,11 @@ func read() {
 	fmt.Scan(&n, &w)
 	reader := bufio.NewReader(os.Stdin)
 	dp = make([][]int, w+1)
-	pts = make([][]int, w+1)
-	memo = make([][][]int, w+1)
-	resArr = make([][]int, w+1)
+	pts = make([][2]int, w+1)
+	memo = make([][][2]int, w+1)
+	resArr = make([][2]int, w+1)
 
 	for i := 1; i <= w; i++ {
-		pts[i] = make([]int, 2)
-		resArr[i] = make([]int, 2)
-
 		line, _ := reader.ReadString('\n')
 		fields := strings.Fields(line)
 
@@ -42,15 +38,12 @@ func read() {
 
 	for i := 0; i <= w; i++ {
 		dp[i] = make([]int, w+1)
-		memo[i] = make([][]int, w+1)
+		memo[i] = make([][2]int, w+1)
 
 		for j := 0; j <= w; j++ {
 			dp[i][j] = INF
-			memo[i][j] = make([]int, 2)
 		}
 	}
-
-	pts[0] = make([]int, 2)
 	dp[0][0] = 0
 }
 
@@ -74,12 +67,12 @@ func main() {
 			k := dp[i][j] + distance(i, next, 1)
 			if dp[next][j] > k {
 				dp[next][j] = k
-				memo[next][j] = []int{i, j}
+				memo[next][j] = [2]int{i, j}
 			}
 			k = dp[i][j] + distance(j, next, 2)
 			if dp[i][next] > k {
 				dp[i][next] = k
-				memo[i][next] = []int{i, j}
+				memo[i][next] = [2]int{i, j}
 			}
 		}
 	}
@@ -89,12 +82,12 @@ func main() {
 	for i := 0; i < w; i++ {
 		if ans > dp[i][w] {
 			ans = dp[i][w]
-			resArr[w] = []int{i, w}
+			resArr[w] = [2]int{i, w}
 		}
 
 		if ans > dp[w][i] {
 			ans = dp[w][i]
-			resArr[w] = []int{w, i}
+			resArr[w] = [2]int{w, i}
 		}
 	}
 
@@ -140,5 +133,15 @@ func distance(a, b, t int) int {
 		}
 	}
 
-	return int(math.Abs(float64(x1-x2)) + math.Abs(float64(y1-y2)))
+	xDist := x1 - x2
+	if xDist < 0 {
+		xDist = -xDist
+	}
+
+	yDist := y1 - y2
+	if yDist < 0 {
+		yDist = -yDist
+	}
+
+	return xDist + yDist
 }
